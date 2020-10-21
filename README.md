@@ -1,3 +1,3 @@
 # projetania
 
-Projeto com GraphQL, Expres e Next.JS.
+Projeto com GraphQL, Express e Next.JS.
