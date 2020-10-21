@@ -1,0 +1,24 @@
+import { useGetUser } from "@/apollo/actions";
+import Redirect from "@/components/shared/Redirect";
+
+const withAuth = (Component, role) => (props) => {
+  const { data: { user } = {}, loading, error } = useGetUser({
+    fetchPolicy: "network-only",
+  });
+
+  if (!loading && (!user || error) && typeof window !== undefined) {
+    return <Redirect to="/entrar" />;
+  }
+
+  if (user) {
+    if (role && !role.includes(user.role)) {
+      return <Redirect to="/entrar" />;
+    }
+
+    return <Component {...props} />;
+  }
+
+  return <p>"Authenticating..."</p>;
+};
+
+export default withAuth;
