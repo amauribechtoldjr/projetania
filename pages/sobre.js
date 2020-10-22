@@ -1,5 +1,7 @@
+import BaseLayout from '@/layouts/BaseLayout';
+
 const Sobre = () => {
-  return <span>Sobre</span>;
+  return <BaseLayout page="Sobre">Sobre</BaseLayout>;
 };
 
 export default Sobre;

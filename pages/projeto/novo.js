@@ -1,3 +1,4 @@
+import BaseLayout from '@/layouts/BaseLayout';
 import ProjectForm from "@/components/forms/project/ProjectForm";
 import Redirect from "@/components/shared/Redirect";
 
@@ -6,7 +7,7 @@ import withAuth from "@/hoc/withAuth";
 
 import { useCreateProject } from "@/apollo/actions";
 
-const ProjectNew = withAuth(() => {
+const ProjectNew = () => {
   const [createProject, { data, loading, error }] = useCreateProject();
 
   const errorMessage = (error) => {
@@ -17,7 +18,7 @@ const ProjectNew = withAuth(() => {
   };
 
   return (
-    <>
+    <BaseLayout page="NovoProjeto">
       <div className="bwm-form mt-5">
         <div className="row">
           <div className="col-md-5 mx-auto">
@@ -35,8 +36,8 @@ const ProjectNew = withAuth(() => {
           </div>
         </div>
       </div>
-    </>
+    </BaseLayout>
   );
-});
+};
 
-export default withApollo(ProjectNew);
+export default withApollo(withAuth(ProjectNew, ['admin', 'page-admin']));

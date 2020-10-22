@@ -20,6 +20,7 @@ const NavbarApp = () => {
       setHasResponse(true);
     }
   }
+  // console.log(user.role);
 
   return (
     <div className="navbar-wrapper">
@@ -52,14 +53,16 @@ const NavbarApp = () => {
                   >
                     {["admin", "page-admin"].includes(user.role) && (
                       <>
-                        {/* <NavDropdown.Item href="#action/3.1"> */}
                         <AppLink href="/projeto/novo" className="dropdown-item">
                           Novo projeto
                         </AppLink>
-                        {/* </NavDropdown.Item> */}
-                        <NavDropdown.Item href="#action/3.1">
+                        <AppLink 
+                          href="/configuracoes/[instructorId]/projetos" 
+                          as={`/configuracoes/${user._id}/projetos`}
+                          className="dropdown-item"
+                        >
                           Meus projetos
-                        </NavDropdown.Item>
+                        </AppLink>
                         <NavDropdown.Divider />
                       </>
                     )}

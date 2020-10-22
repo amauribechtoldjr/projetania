@@ -1,4 +1,5 @@
 import React from "react";
+import BaseLayout from '@/layouts/BaseLayout';
 import ProjectCard from "../components/shared/projetos/ProjectCard";
 
 import withApollo from "@/hoc/withApollo";
@@ -41,7 +42,7 @@ const Projetos = () => {
   const projects = (data && data.projects) || [];
 
   return (
-    <>
+    <BaseLayout page="Projetos">
       <section className="section-title">
         <div className="px-2">
           <div className="pt-5 pb-4">
@@ -65,7 +66,7 @@ const Projetos = () => {
             ))}
         </div>
       </section>
-    </>
+    </BaseLayout>
   );
 };
 

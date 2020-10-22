@@ -1,4 +1,5 @@
 import React from "react";
+import BaseLayout from '@/layouts/BaseLayout';
 import {useQuery} from '@apollo/react-hooks';
 import {GET_PROJECT} from '@/apollo/queries';
 import withApollo from '@/hoc/withApollo';
@@ -12,7 +13,7 @@ const Project = ({ query }) => {
 
   const project = data && data.project || {};
 
-  return <h1> Eu sou a pagina com o título: {project.title}</h1>;
+  return <BaseLayout page="ProjetoPage"> Eu sou a pagina com o título: {project.title}</BaseLayout>;
 };
 
 Project.getInitialProps = async ({ query }) => {

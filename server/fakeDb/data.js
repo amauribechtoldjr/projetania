@@ -23,7 +23,8 @@ const data = {
       username: "amauribechtoldjr",
       password: "senha123",
       email: "amauribechtoldjr@gmail.com",
-      info: "guest",
+      info: "page-admin",
+      role: 'page-admin'
     },
     {
       _id: user2Id,

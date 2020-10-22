@@ -1,3 +1,5 @@
+import BaseLayout from '@/layouts/BaseLayout';
+
 const apiCall = () => {
   return new Promise((res, rej) => {
     setTimeout(() => {
@@ -7,7 +9,7 @@ const apiCall = () => {
 };
 
 const Eventos = (props) => {
-  return <span>Eventos: {props.testingData}</span>;
+  return <BaseLayout page="EventoPage">Eventos: {props.testingData}</BaseLayout>;
 };
 
 Eventos.getInitialProps = async () => {

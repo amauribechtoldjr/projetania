@@ -1,8 +1,8 @@
 import Link from "next/link";
 
-const AppLink = ({ children, className, href }) => {
+const AppLink = ({ children, className, href, as }) => {
   return (
-    <Link href={href}>
+    <Link href={href} as={as}>
       <a className={className}>{children}</a>
     </Link>
   );

@@ -20,6 +20,17 @@ export const GET_PROJECT = gql`
   }
 `;
 
+export const USER_PROJECTS = gql`
+  query UserProjects {
+    userProjects {
+      _id
+      title
+      about_project
+      createdAt
+    }
+  }
+`;
+
 export const GET_USER = gql`
   query User {
     user {

@@ -5,6 +5,8 @@ import withApollo from "@/hoc/withApollo";
 import { useForm } from "react-hook-form";
 import DatePicker from "react-datepicker";
 
+import BaseLayout from '@/layouts/BaseLayout';
+
 const Chicken = () => {
   const [chickendDateStart, setChickendDateStart] = useState(null);
   const [chickendDateEnd, setChickendDateEnd] = useState(null);
@@ -25,7 +27,7 @@ const Chicken = () => {
   };
 
   return (
-    <>
+    <BaseLayout>
       <div className="bwm-form mt-5">
         <div className="row">
           <div className="col-md-5 mx-auto">
@@ -101,7 +103,7 @@ const Chicken = () => {
           </div>
         </div>
       </div>
-    </>
+    </BaseLayout>
   );
 };
 

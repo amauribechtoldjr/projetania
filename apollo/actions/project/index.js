@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
 
-import { GET_PROJECTS } from "@/apollo/queries";
+import { GET_PROJECTS, USER_PROJECTS } from "@/apollo/queries";
 
 import {
   CREATE_PROJECT,
@@ -9,6 +9,7 @@ import {
 } from "@/apollo/mutations";
 
 export const useGetProjects = () => useQuery(GET_PROJECTS);
+export const useUserProjects = () => useQuery(USER_PROJECTS);
 
 export const useCreateProject = () =>
   useMutation(CREATE_PROJECT, {

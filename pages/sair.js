@@ -1,3 +1,4 @@
+import BaseLayout from '@/layouts/BaseLayout';
 import { useEffect } from "react";
 import withApollo from "@/hoc/withApollo";
 import { useSignOut } from "@/apollo/actions";
@@ -15,7 +16,7 @@ const Sair = ({ apollo }) => {
   }, []);
 
   return (
-    <>
+    <BaseLayout page="Sair">
       <div className="bwm-form mt-5">
         <div className="row">
           <div className="col-md-5 mx-auto">
@@ -24,7 +25,7 @@ const Sair = ({ apollo }) => {
           </div>
         </div>
       </div>
-    </>
+    </BaseLayout>
   );
 };
 

@@ -1,0 +1,2 @@
+1 - fix transitions on redirects
+2 - display message when pushed to login page

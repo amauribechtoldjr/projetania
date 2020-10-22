@@ -1,3 +1,4 @@
+import BaseLayout from '@/layouts/BaseLayout';
 import RegisterForm from "@/components/forms/RegisterForm";
 import Redirect from "@/components/shared/Redirect";
 import withApollo from "@/hoc/withApollo";
@@ -14,7 +15,7 @@ const Registrar = () => {
   };
 
   return (
-    <>
+    <BaseLayout page="Registrar">
       <div className="bwm-form mt-5">
         <div className="row">
           <div className="col-md-5 mx-auto">
@@ -41,7 +42,7 @@ const Registrar = () => {
           </div>
         </div>
       </div>
-    </>
+    </BaseLayout>
   );
 };
 

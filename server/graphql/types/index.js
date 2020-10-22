@@ -1,6 +1,7 @@
 const projectFields = `
   title: String!
   about_project: String
+  createdAt: String
 `;
 
 exports.projectsTypes = `
