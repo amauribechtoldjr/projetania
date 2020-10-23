@@ -31,7 +31,7 @@ const ProjectCard = ({ project, updateProject, deleteProject }) => {
         <button onClick={() => updateProject(project._id)}>
           Update project
         </button>
-        <button onClick={() => deleteProject(project._id)}>
+        <button onClick={() => deleteProject && deleteProject(project._id)}>
           Delete project
         </button>
       </div>

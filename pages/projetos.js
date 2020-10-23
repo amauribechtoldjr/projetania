@@ -1,5 +1,5 @@
 import React from "react";
-import BaseLayout from '@/layouts/BaseLayout';
+import BaseLayout from "@/layouts/BaseLayout";
 import ProjectCard from "../components/shared/projetos/ProjectCard";
 
 import withApollo from "@/hoc/withApollo";
@@ -7,18 +7,13 @@ import { getDataFromTree } from "@apollo/react-ssr";
 
 import { useRouter } from "next/router";
 
-import {
-  useGetProjects,
-  useUpdateProject,
-  useDeleteProject,
-} from "@/apollo/actions";
+import { useGetProjects, useUpdateProject } from "@/apollo/actions";
 
 const Projetos = () => {
   const { data } = useGetProjects();
   const router = useRouter();
 
   const [updateProject] = useUpdateProject();
-  const [deleteProject] = useDeleteProject();
 
   const handleUpdateProject = (id) => {
     const variables = {
@@ -28,11 +23,6 @@ const Projetos = () => {
     };
 
     updateProject({ variables });
-  };
-
-  const handleDeleteProject = (id) => {
-    const variables = { id };
-    deleteProject({ variables });
   };
 
   const handleCreateProject = async () => {
@@ -61,7 +51,6 @@ const Projetos = () => {
                 key={project._id}
                 project={project}
                 updateProject={handleUpdateProject}
-                deleteProject={handleDeleteProject}
               />
             ))}
         </div>

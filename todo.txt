@@ -1,2 +1,5 @@
 1 - fix transitions on redirects
 2 - display message when pushed to login page
+3 - Invariant violation: cant find field projects
+4 - date formats
+5 - implement server side redirect - maybe

@@ -56,8 +56,8 @@ const NavbarApp = () => {
                         <AppLink href="/projeto/novo" className="dropdown-item">
                           Novo projeto
                         </AppLink>
-                        <AppLink 
-                          href="/configuracoes/[instructorId]/projetos" 
+                        <AppLink
+                          href="/configuracoes/[instructor_id]/projetos"
                           as={`/configuracoes/${user._id}/projetos`}
                           className="dropdown-item"
                         >

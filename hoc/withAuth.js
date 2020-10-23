@@ -18,7 +18,7 @@ const withAuth = (Component, role) => (props) => {
     return <Component {...props} />;
   }
 
-  return <p>"Authenticating..."</p>;
+  return null;
 };
 
 export default withAuth;

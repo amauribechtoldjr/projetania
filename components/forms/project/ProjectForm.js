@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 
-const ProjectForm = ({ onSubmit, loading }) => {
-  const { register, handleSubmit } = useForm();
+const ProjectForm = ({ onSubmit, loading, initialData }) => {
+  const { register, handleSubmit } = useForm({ defaultValues: initialData });
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -27,7 +27,7 @@ const ProjectForm = ({ onSubmit, loading }) => {
       </div>
       {!loading && (
         <button type="submit" className="btn btn-main bg-blue py-2 ttu">
-          Cadastrar
+          {initialData ? "Alterar" : "Cadastrar"}
         </button>
       )}
       {loading && <span>Cadastrando...</span>}
