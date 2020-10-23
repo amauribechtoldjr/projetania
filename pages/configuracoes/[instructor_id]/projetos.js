@@ -12,6 +12,7 @@ import {
   useUpdateProject,
   useDeleteProject,
 } from "@/apollo/actions";
+import {formatDate} from '@/utils/functions';
 
 const ConfigurationProjects = () => {
   const { data } = useUserProjects();
@@ -29,18 +30,22 @@ const ConfigurationProjects = () => {
     }
   };
 
+  
+
   return (
     <BaseLayout page="Projetos">
       <div className="row mt-4">
         <div className="col-md-12">
           <h1 className="mb-4">Seus projetos</h1>
           {userProjects &&
-            userProjects.map((p) => (
+            userProjects.map((p) => {
+              console.log();
+              return (
               <Card className="mb-2" key={p._id}>
                 <Card.Header>{p.title}</Card.Header>
                 <Card.Body>
                   <Card.Title>
-                    {p.title} - {p.createdAt}
+                    {`${p.title} - ${formatDate(p.createdAt, 'Data não informada')}`}
                   </Card.Title>
                   <Card.Text>{p.about_project}</Card.Text>
                   <Link
@@ -54,7 +59,7 @@ const ConfigurationProjects = () => {
                   </Button>
                 </Card.Body>
               </Card>
-            ))}
+            );})}
         </div>
       </div>
     </BaseLayout>

@@ -1,5 +1,7 @@
-1 - fix transitions on redirects
-2 - display message when pushed to login page
+1 - fix transitions on redirects - done
+2 - display message when pushed to login page - done
 3 - Invariant violation: cant find field projects
-4 - date formats
+4 - date formats - done
 5 - implement server side redirect - maybe
+6 - display loader
+

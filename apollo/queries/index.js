@@ -16,6 +16,8 @@ export const GET_PROJECT = gql`
       _id
       title
       about_project
+      createdAt
+      isExpired @client
     }
   }
 `;

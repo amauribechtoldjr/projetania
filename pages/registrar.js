@@ -4,6 +4,7 @@ import Redirect from "@/components/shared/Redirect";
 import withApollo from "@/hoc/withApollo";
 import { Mutation } from "react-apollo";
 import { SIGN_UP } from "@/apollo/mutations";
+import { MESSAGE_TYPES } from '@/utils/consts';
 
 const Registrar = () => {
   // TODO: handle DB errors
@@ -29,7 +30,7 @@ const Registrar = () => {
                         signUpUser({ variables: { ...registerData } });
                       }}
                     />
-                    {data && data.signUp && <Redirect to="/entrar" />}
+                    {data && data.signUp && <Redirect to="/entrar" query={{message: MESSAGE_TYPES.SIGNUP_SUCCESS}}/>}
                     {error && (
                       <div className="alert alert-danger">
                         {errorMessage(error)}
