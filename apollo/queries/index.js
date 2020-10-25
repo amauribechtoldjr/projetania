@@ -42,3 +42,34 @@ export const GET_USER = gql`
     }
   }
 `;
+
+export const GET_FORUM_CATEGORIES = gql`
+  query ForumCategories {
+    forumCategories {
+      _id
+      slug
+      title
+      subtitle
+    }
+  }
+`;
+
+export const GET_TOPICS_BY_CATEGORY = gql`
+  query TopicsByCategory($slug: ID) {
+    topicsByCategory(category: $slug) {
+      _id
+      slug
+      title
+      content
+      user {
+        username
+        avatar
+      }
+      forumCategory {
+        _id
+        title
+        slug
+      }
+    }
+  }
+`;

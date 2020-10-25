@@ -38,4 +38,28 @@ exports.userTypes = `
     email: String!
     password: String!
   }
-`
+`;
+
+exports.forumTypes = `
+  type ForumCategory {
+    _id: ID
+    title: String
+    subtitle: String
+    slug: String
+  }
+
+  type Author {
+    avatar: String
+    username: String
+  }
+
+  type Topic {
+    _id: ID
+    slug: String
+    title: String
+    content: String
+    forumCategory: ForumCategory
+    user: Author
+    createdAt: String
+  }
+`;

@@ -1,26 +1,37 @@
 import { useGetUser } from "@/apollo/actions";
 import Redirect from "@/components/shared/Redirect";
-import {MESSAGE_TYPES} from '@/utils/consts'; 
+import { MESSAGE_TYPES } from "@/utils/consts";
+import SpinningLoader from "@/components/shared/SpinningLoader";
 
-export default (Component, role, options = {ssr: false}) => {
+const withAuth = (Component, role, options = { ssr: false }) => {
   function withAuth(props) {
     const { data: { user } = {}, loading, error } = useGetUser({
       fetchPolicy: "network-only",
     });
 
     if (!loading && (!user || error) && typeof window !== undefined) {
-      return <Redirect to="/entrar" query={{message: MESSAGE_TYPES.NOT_CONNECTED}} />;
+      return (
+        <Redirect
+          to="/entrar"
+          query={{ message: MESSAGE_TYPES.NOT_CONNECTED }}
+        />
+      );
     }
 
     if (user) {
       if (role && !role.includes(user.role)) {
-        return <Redirect to="/entrar" query={{message: MESSAGE_TYPES.NOT_AUTHORIZED}} />;
+        return (
+          <Redirect
+            to="/entrar"
+            query={{ message: MESSAGE_TYPES.NOT_AUTHORIZED }}
+          />
+        );
       }
 
-      return <Component {...props} query={{message: ''}}/>;
+      return <Component {...props} query={{ message: "" }} />;
     }
 
-    return <p>Loading...</p>;
+    return <SpinningLoader variant="md" />;
   }
 
   if (options.ssr) {
@@ -28,27 +39,36 @@ export default (Component, role, options = {ssr: false}) => {
       res.redirect(to);
       res.end();
       return {};
-    }
+    };
 
     withAuth.getInitialProps = async (context) => {
-      const {req, res} = context;
+      const { req, res } = context;
 
       if (req) {
-        const {user} = req;
+        const { user } = req;
 
         if (!user) {
-          return serverRdirect(res, `/entrar?message=${MESSAGE_TYPES.NOT_CONNECTED}`);
+          return serverRdirect(
+            res,
+            `/entrar?message=${MESSAGE_TYPES.NOT_CONNECTED}`
+          );
         }
 
         if (role && !role.includes(user.role)) {
-          return serverRdirect(res, `/entrar?message=${MESSAGE_TYPES.NOT_AUTHORIZED}`);
+          return serverRdirect(
+            res,
+            `/entrar?message=${MESSAGE_TYPES.NOT_AUTHORIZED}`
+          );
         }
       }
 
-      const pageProps = await Component.getInitialProps && Component.getInitialProps(context);
-      return {...pageProps}
-    }
+      const pageProps =
+        (await Component.getInitialProps) && Component.getInitialProps(context);
+      return { ...pageProps };
+    };
   }
-  
+
   return withAuth;
 };
+
+export default withAuth;

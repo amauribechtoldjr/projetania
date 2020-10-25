@@ -34,6 +34,9 @@ const NavbarApp = () => {
             <AppLink href="/projetos" className="nav-link mr-3">
               Projetos
             </AppLink>
+            <AppLink href="/forum/categorias" className="nav-link mr-3">
+              Forum
+            </AppLink>
             <AppLink href="#" className="nav-link mr-3">
               Eventos
             </AppLink>

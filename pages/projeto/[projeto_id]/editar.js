@@ -25,10 +25,6 @@ const ProjectEdit = () => {
       },
     });
     toast("Projeto alterado com sucesso!");
-    // router.push(
-    //   "/configuracoes/[instructor_id]/projetos",
-    //   `/configuracoes/xisde/projetos`
-    // );
   };
 
   const errorMessage = (error) => {

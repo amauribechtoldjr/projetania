@@ -12,7 +12,7 @@ import {
   useUpdateProject,
   useDeleteProject,
 } from "@/apollo/actions";
-import {formatDate} from '@/utils/functions';
+import { formatDate } from "@/utils/functions";
 
 const ConfigurationProjects = () => {
   const { data } = useUserProjects();
@@ -30,8 +30,6 @@ const ConfigurationProjects = () => {
     }
   };
 
-  
-
   return (
     <BaseLayout page="Projetos">
       <div className="row mt-4">
@@ -41,25 +39,32 @@ const ConfigurationProjects = () => {
             userProjects.map((p) => {
               console.log();
               return (
-              <Card className="mb-2" key={p._id}>
-                <Card.Header>{p.title}</Card.Header>
-                <Card.Body>
-                  <Card.Title>
-                    {`${p.title} - ${formatDate(p.createdAt, 'Data não informada')}`}
-                  </Card.Title>
-                  <Card.Text>{p.about_project}</Card.Text>
-                  <Link
-                    href="/projeto/[projeto_id]/editar"
-                    as={`/projeto/${p._id}/editar`}
-                  >
-                    <a className="btn btn-warning mr-1">Editar</a>
-                  </Link>
-                  <Button variant="danger" onClick={handleDeleteProject(p._id)}>
-                    Excluir
-                  </Button>
-                </Card.Body>
-              </Card>
-            );})}
+                <Card className="mb-2" key={p._id}>
+                  <Card.Header>{p.title}</Card.Header>
+                  <Card.Body>
+                    <Card.Title>
+                      {`${p.title} - ${formatDate(
+                        p.createdAt,
+                        "Data não informada"
+                      )}`}
+                    </Card.Title>
+                    <Card.Text>{p.about_project}</Card.Text>
+                    <Link
+                      href="/projeto/[projeto_id]/editar"
+                      as={`/projeto/${p._id}/editar`}
+                    >
+                      <a className="btn btn-warning mr-1">Editar</a>
+                    </Link>
+                    <Button
+                      variant="danger"
+                      onClick={handleDeleteProject(p._id)}
+                    >
+                      Excluir
+                    </Button>
+                  </Card.Body>
+                </Card>
+              );
+            })}
         </div>
       </div>
     </BaseLayout>

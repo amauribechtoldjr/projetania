@@ -6,17 +6,21 @@ const {
   projectsMutations,
   userMutations,
   userQueries,
+  forumQueries,
 } = require("./resolvers");
-const { projectsTypes, userTypes } = require("./types");
+const { projectsTypes, userTypes, forumTypes } = require("./types");
 
 // Graphql Models
 const Project = require("./models/Project");
 const User = require("./models/User");
+const ForumCategory = require("./models/ForumCategory");
+const Topic = require("./models/Topic");
 
 exports.createApolloServer = () => {
   const typeDefs = gql`
     ${projectsTypes}
     ${userTypes}
+    ${forumTypes}
 
     type Query {
       project(id: ID): Project
@@ -24,6 +28,9 @@ exports.createApolloServer = () => {
       userProjects: [Project]
 
       user: User
+
+      forumCategories: [ForumCategory]
+      topicsByCategory(category: ID): [Topic]
     }
 
     type Mutation {
@@ -41,6 +48,7 @@ exports.createApolloServer = () => {
     Query: {
       ...projectsQueries,
       ...userQueries,
+      ...forumQueries,
     },
     Mutation: {
       ...projectsMutations,
@@ -56,6 +64,8 @@ exports.createApolloServer = () => {
       models: {
         Project: new Project(mongoose.model("Project"), req.user),
         User: new User(mongoose.model("User")),
+        ForumCategory: new ForumCategory(mongoose.model("ForumCategory")),
+        Topic: new Topic(mongoose.model("Topic")),
       },
     }),
   });
