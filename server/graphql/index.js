@@ -7,6 +7,7 @@ const {
   userMutations,
   userQueries,
   forumQueries,
+  forumMutations,
 } = require("./resolvers");
 const { projectsTypes, userTypes, forumTypes } = require("./types");
 
@@ -31,12 +32,15 @@ exports.createApolloServer = () => {
 
       forumCategories: [ForumCategory]
       topicsByCategory(category: ID): [Topic]
+      topicBySlug(slug: String): Topic
     }
 
     type Mutation {
       createProject(input: ProjectInput): Project
       updateProject(id: ID, input: ProjectInput): Project
       deleteProject(id: ID): Project
+
+      createTopic(input: TopicInput): Topic
 
       signIn(input: SignInInput): User
       signUp(input: SignUpInput): String
@@ -53,6 +57,7 @@ exports.createApolloServer = () => {
     Mutation: {
       ...projectsMutations,
       ...userMutations,
+      ...forumMutations,
     },
   };
 
@@ -65,7 +70,7 @@ exports.createApolloServer = () => {
         Project: new Project(mongoose.model("Project"), req.user),
         User: new User(mongoose.model("User")),
         ForumCategory: new ForumCategory(mongoose.model("ForumCategory")),
-        Topic: new Topic(mongoose.model("Topic")),
+        Topic: new Topic(mongoose.model("Topic"), req.user),
       },
     }),
   });

@@ -1,11 +1,11 @@
-import BaseLayout from '@/layouts/BaseLayout';
+import BaseLayout from "@/layouts/BaseLayout";
 import ProjectForm from "@/components/forms/project/ProjectForm";
 import Redirect from "@/components/shared/Redirect";
 
 import withApollo from "@/hoc/withApollo";
 import withAuth from "@/hoc/withAuth";
 
-import { useCreateProject } from "@/apollo/actions";
+import { useCreateProject } from "@/apollo/actions/project";
 
 const ProjectNew = () => {
   const [createProject, { data, loading, error }] = useCreateProject();
@@ -40,4 +40,4 @@ const ProjectNew = () => {
   );
 };
 
-export default withApollo(withAuth(ProjectNew, ['admin', 'page-admin']));
+export default withApollo(withAuth(ProjectNew, ["admin", "page-admin"]));

@@ -1,5 +1,21 @@
 import { gql } from "apollo-boost";
 
+export const TopicResponseFields = `
+  _id
+  slug
+  title
+  content
+  user {
+    username
+    avatar
+  }
+  forumCategory {
+    _id
+    title
+    slug
+  }
+`;
+
 export const GET_PROJECTS = gql`
   query Projects {
     projects {
@@ -57,19 +73,15 @@ export const GET_FORUM_CATEGORIES = gql`
 export const GET_TOPICS_BY_CATEGORY = gql`
   query TopicsByCategory($slug: ID) {
     topicsByCategory(category: $slug) {
-      _id
-      slug
-      title
-      content
-      user {
-        username
-        avatar
-      }
-      forumCategory {
-        _id
-        title
-        slug
-      }
+      ${TopicResponseFields}
+    }
+  }
+`;
+
+export const GET_TOPIC_BY_SLUG = gql`
+  query TopicBySlug($slug: String) {
+    topicBySlug(slug: $slug) {
+      ${TopicResponseFields}
     }
   }
 `;

@@ -1,4 +1,4 @@
-import { useGetUser } from "@/apollo/actions";
+import { useGetUser } from "@/apollo/actions/user";
 import Redirect from "@/components/shared/Redirect";
 import { MESSAGE_TYPES } from "@/utils/consts";
 import SpinningLoader from "@/components/shared/SpinningLoader";

@@ -7,7 +7,7 @@ import { getDataFromTree } from "@apollo/react-ssr";
 
 import { useRouter } from "next/router";
 
-import { useGetProjects, useUpdateProject } from "@/apollo/actions";
+import { useGetProjects, useUpdateProject } from "@/apollo/actions/project";
 
 const Projetos = () => {
   const { data } = useGetProjects();

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import withApollo from "@/hoc/withApollo";
-import { useLazyGetUser } from "@/apollo/actions";
+import { useLazyGetUser } from "@/apollo/actions/user";
 import AppLink from "@/components/shared/AppLink";
 
 const NavbarApp = () => {
@@ -20,7 +20,6 @@ const NavbarApp = () => {
       setHasResponse(true);
     }
   }
-  // console.log(user.role);
 
   return (
     <div className="navbar-wrapper">

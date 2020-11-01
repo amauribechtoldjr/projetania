@@ -1,7 +1,7 @@
-import BaseLayout from '@/layouts/BaseLayout';
+import BaseLayout from "@/layouts/BaseLayout";
 import { useEffect } from "react";
 import withApollo from "@/hoc/withApollo";
-import { useSignOut } from "@/apollo/actions";
+import { useSignOut } from "@/apollo/actions/user";
 import { useRouter } from "next/router";
 
 const Sair = ({ apollo }) => {

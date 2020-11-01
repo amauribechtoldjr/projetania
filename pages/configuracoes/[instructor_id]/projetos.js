@@ -11,7 +11,7 @@ import {
   useGetProjects,
   useUpdateProject,
   useDeleteProject,
-} from "@/apollo/actions";
+} from "@/apollo/actions/project";
 import { formatDate } from "@/utils/functions";
 
 const ConfigurationProjects = () => {
@@ -37,7 +37,6 @@ const ConfigurationProjects = () => {
           <h1 className="mb-4">Seus projetos</h1>
           {userProjects &&
             userProjects.map((p) => {
-              console.log();
               return (
                 <Card className="mb-2" key={p._id}>
                   <Card.Header>{p.title}</Card.Header>

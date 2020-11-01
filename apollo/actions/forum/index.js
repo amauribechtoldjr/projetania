@@ -1,7 +1,37 @@
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery, useMutation } from "@apollo/react-hooks";
 
-import { GET_FORUM_CATEGORIES, GET_TOPICS_BY_CATEGORY } from "@/apollo/queries";
+import { CREATE_TOPIC } from "@/apollo/mutations/forum";
+import {
+  GET_FORUM_CATEGORIES,
+  GET_TOPICS_BY_CATEGORY,
+  GET_TOPIC_BY_SLUG,
+} from "@/apollo/queries";
 
 export const useGetForumCategories = () => useQuery(GET_FORUM_CATEGORIES);
 export const useGetTopicsByCategory = (variables) =>
   useQuery(GET_TOPICS_BY_CATEGORY, { variables });
+
+export const useCreateTopic = () =>
+  useMutation(CREATE_TOPIC, {
+    update(cache, { data: { createTopic } }) {
+      try {
+        const { topicsByCategory } = cache.readQuery({
+          query: GET_TOPICS_BY_CATEGORY,
+          variables: {
+            slug: createTopic.forumCategory.slug,
+          },
+        });
+
+        cache.writeQuery({
+          query: GET_TOPICS_BY_CATEGORY,
+          data: { topicsByCategory: [createTopic, ...topicsByCategory] },
+          variables: {
+            slug: createTopic.forumCategory.slug,
+          },
+        });
+      } catch (e) {}
+    },
+  });
+
+export const useGetTopicBySlug = (options) =>
+  useQuery(GET_TOPIC_BY_SLUG, options);
