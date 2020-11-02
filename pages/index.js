@@ -45,7 +45,7 @@ const Home = () => {
       </section>
       <section className="pb-5">
         <div className="list-group">
-          {topics && topics.map((t) => <TopicLink topic={t} key={t._id} />)}
+          {topics && topics.map((t) => <TopicLink key={t._id} topic={t} />)}
         </div>
       </section>
       <Link href="/forum/categorias">

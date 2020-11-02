@@ -125,6 +125,7 @@ export const GET_HIGHLIGHT = gql`
         about_project
       }
       topics {
+        _id
         slug
         title
         createdAt
