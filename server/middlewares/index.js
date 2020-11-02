@@ -15,7 +15,7 @@ exports.init = (server, db) => {
   };
 
   if (process.env.NODE_ENV === "production") {
-    server.set("trus proxy", 1);
+    server.set("trust proxy", 1);
     sess.cookie.secure = true;
     sess.cookie.httpOnly = true;
     sess.cookie.sameSite = true;
