@@ -17,7 +17,9 @@ import Pagination from "@/components/shared/Pagination";
 const useTopicInitialData = () => {
   const router = useRouter();
   const { topicSlug: slug } = router.query;
-  const { data: topicData } = useGetTopicBySlug({ variables: { slug } });
+  const { data: topicData } = useGetTopicBySlug({
+    variables: { slug, pageNum: 1, pageSize: 5 },
+  });
   const { data: topicPostsData, fetchMore } = useGetPostsByTopic({
     variables: { slug },
   });
