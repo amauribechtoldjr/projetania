@@ -14,9 +14,7 @@ import Replier from "@/components/shared/Replier";
 import { toast } from "react-toastify";
 import Pagination from "@/components/shared/Pagination";
 
-const useTopicInitialData = (pagination) => {
-  const router = useRouter();
-  const { topicSlug: slug } = router.query;
+const useTopicInitialData = (slug, pagination) => {
   const { data: topicData } = useGetTopicBySlug({
     variables: {
       slug,
@@ -39,16 +37,7 @@ const useTopicInitialData = (pagination) => {
   return { topic, ...postsData, user, fetchMore };
 };
 
-const PostList = ({
-  posts,
-  topic,
-  user,
-  fetchMore,
-  count,
-  pageSize,
-  pageNum,
-  onPageChange,
-}) => {
+const PostList = ({ posts, topic, user, fetchMore, ...pagination }) => {
   const pageEnd = useRef();
   const [createPost, { error }] = useCreatePost();
   const [isReplierOpen, setReplierOpen] = useState(false);
@@ -119,12 +108,7 @@ const PostList = ({
               </div>
             )}
             <div className="pagination-container ml-auto">
-              <Pagination
-                count={count}
-                pageSize={pageSize}
-                pageNum={pageNum}
-                onChange={onPageChange}
-              />
+              <Pagination {...pagination} />
             </div>
           </div>
         </div>
@@ -149,8 +133,13 @@ const PostList = ({
 };
 
 const Topic = () => {
-  const [pagination, setPagination] = useState({ pageNum: 1, pageSize: 5 });
-  const { topic, posts, ...rest } = useTopicInitialData(pagination);
+  const router = useRouter();
+  const { topicSlug: slug, pageNum = 1, pageSize = 5 } = router.query;
+  const [pagination, setPagination] = useState({
+    pageNum: parseInt(pageNum, 10),
+    pageSize: parseInt(pageSize, 10),
+  });
+  const { topic, posts, ...rest } = useTopicInitialData(slug, pagination);
 
   return (
     <BaseLayout>
@@ -167,6 +156,11 @@ const Topic = () => {
         {...rest}
         {...pagination}
         onPageChange={(pageNum, pageSize) => {
+          router.push(
+            "/forum/topicos/[slug]",
+            `/forum/topicos/${slug}?pageNum=${pageNum}&pageSize=${pageSize}`,
+            { shallow: true }
+          );
           setPagination({ pageNum, pageSize });
         }}
       />
