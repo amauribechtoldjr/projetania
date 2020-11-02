@@ -4,14 +4,7 @@ import { formatDate, shortify } from "@/utils/functions";
 
 const TopicLink = ({ topic }) => (
   <Link href="/forum/topicos/[topicSlug]" as={`/forum/topicos/${topic.slug}`}>
-    <a
-      className="
-        list-group-item
-        list-group-item-action flex-column
-        align-items-start py-3 subtle-shadow
-        no-border mb-3
-      "
-    >
+    <a className="list-group-item list-group-item-action flex-column align-items-start py-3 subtle-shadow no-border mb-3">
       <div className="d-flex w-100 justify-content-between">
         <h5 className="mb-1 black">{topic.title}</h5>
         <small>
