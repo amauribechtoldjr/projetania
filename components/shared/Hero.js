@@ -4,16 +4,11 @@ const Hero = () => {
       <div className="fj-hero-wrapper row">
         <div className="hero-left col-md-6">
           <h1 className="white hero-title">
-            Hey I'm Filip. Experienced full stack developer
+            Projetânia, você tem a ideia e nós a solução!
           </h1>
           <h2 className="white hero-subtitle">
-            Check my portfolio and video tutorials
+            O controle completo da sua festa!
           </h2>
-          <div className="button-container">
-            <a href="" className="btn btn-main bg-blue ttu">
-              See my work
-            </a>
-          </div>
         </div>
         <div className="hero-right col-md-6">
           <div className="hero-image-container">
