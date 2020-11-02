@@ -16,6 +16,7 @@ const Project = require("./models/Project");
 const User = require("./models/User");
 const ForumCategory = require("./models/ForumCategory");
 const Topic = require("./models/Topic");
+const Post = require("./models/Post");
 
 exports.createApolloServer = () => {
   const typeDefs = gql`
@@ -31,8 +32,11 @@ exports.createApolloServer = () => {
       user: User
 
       forumCategories: [ForumCategory]
+
       topicsByCategory(category: ID): [Topic]
       topicBySlug(slug: String): Topic
+
+      postsByTopic(slug: String): [Post]
     }
 
     type Mutation {
@@ -71,6 +75,7 @@ exports.createApolloServer = () => {
         User: new User(mongoose.model("User")),
         ForumCategory: new ForumCategory(mongoose.model("ForumCategory")),
         Topic: new Topic(mongoose.model("Topic"), req.user),
+        Post: new Post(mongoose.model("Post"), req.user),
       },
     }),
   });
