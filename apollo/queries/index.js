@@ -87,7 +87,7 @@ export const GET_TOPIC_BY_SLUG = gql`
   }
 `;
 
-const postResponseFields = `
+export const postResponseFields = `
   _id
   content
   slug

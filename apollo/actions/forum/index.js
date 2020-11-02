@@ -1,6 +1,6 @@
 import { useQuery, useMutation } from "@apollo/react-hooks";
 
-import { CREATE_TOPIC } from "@/apollo/mutations/forum";
+import { CREATE_TOPIC, CREATE_POST } from "@/apollo/mutations/forum";
 import {
   GET_FORUM_CATEGORIES,
   GET_TOPICS_BY_CATEGORY,
@@ -11,6 +11,8 @@ import {
 export const useGetForumCategories = () => useQuery(GET_FORUM_CATEGORIES);
 export const useGetTopicsByCategory = (variables) =>
   useQuery(GET_TOPICS_BY_CATEGORY, { variables });
+
+export const useCreatePost = () => useMutation(CREATE_POST);
 
 export const useCreateTopic = () =>
   useMutation(CREATE_TOPIC, {

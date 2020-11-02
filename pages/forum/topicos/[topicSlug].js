@@ -1,12 +1,17 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import BaseLayout from "@/layouts/BaseLayout";
-import { useGetTopicBySlug, useGetPostsByTopic } from "@/apollo/actions/forum";
+import {
+  useGetTopicBySlug,
+  useGetPostsByTopic,
+  useCreatePost,
+} from "@/apollo/actions/forum";
 import { useGetUser } from "@/apollo/actions/user";
 import { useRouter } from "next/router";
 import withApollo from "@/hoc/withApollo";
 import { getDataFromTree } from "@apollo/react-ssr";
 import PostItem from "@/components/Forum/PostItem";
 import Replier from "@/components/shared/Replier";
+import { toast } from "react-toastify";
 
 const useTopicInitialData = () => {
   const router = useRouter();
@@ -21,8 +26,27 @@ const useTopicInitialData = () => {
 };
 
 const PostList = ({ posts, topic, user }) => {
+  const pageEnd = useRef();
+  const [createPost, { error }] = useCreatePost();
   const [isReplierOpen, setReplierOpen] = useState(false);
   const [replyTo, setReplyTo] = useState(null);
+
+  const handleCreatePost = async (reply, resetReplier) => {
+    if (replyTo) {
+      reply.parent = replyTo._id;
+    }
+
+    reply.topic = topic._id;
+    await createPost({ variables: { ...reply } });
+    toast.success("Post criado com sucesso!", { autoClose: 2000 });
+    setReplierOpen(false);
+    resetReplier();
+    scrollToBottom();
+  };
+
+  const scrollToBottom = () => {
+    pageEnd.current.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
     <section className="mb-5">
@@ -63,10 +87,11 @@ const PostList = ({ posts, topic, user }) => {
           </div>
         </div>
       </div>
+      <div ref={pageEnd} />
       <Replier
         open={isReplierOpen}
         hasTitle={false}
-        onSubmit={() => {}}
+        onSubmit={handleCreatePost}
         replyTo={(replyTo && replyTo.user.username) || topic.title}
         closeBtn={() => (
           <button
