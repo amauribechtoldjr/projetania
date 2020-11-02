@@ -1,5 +1,5 @@
 import BaseLayout from "@/layouts/BaseLayout";
-import { useGetTopicBySlug } from "@/apollo/actions/forum";
+import { useGetTopicBySlug, useGetPostsByTopic } from "@/apollo/actions/forum";
 import { useRouter } from "next/router";
 import withApollo from "@/hoc/withApollo";
 import { getDataFromTree } from "@apollo/react-ssr";
@@ -7,13 +7,15 @@ import { getDataFromTree } from "@apollo/react-ssr";
 const useTopicInitialData = () => {
   const router = useRouter();
   const { topicSlug: slug } = router.query;
-  const { data } = useGetTopicBySlug({ variables: { slug } });
-  const topic = (data && data.topicBySlug) || {};
-  return { topic };
+  const { data: topicData } = useGetTopicBySlug({ variables: { slug } });
+  const { data: topicPostsData } = useGetPostsByTopic({ variables: { slug } });
+  const topic = (topicData && topicData.topicBySlug) || {};
+  const posts = (topicPostsData && topicPostsData.postsByTopic) || [];
+  return { topic, posts };
 };
 
 const Topic = () => {
-  const { topic } = useTopicInitialData();
+  const { topic, posts } = useTopicInitialData();
 
   return (
     <BaseLayout>

@@ -85,3 +85,29 @@ export const GET_TOPIC_BY_SLUG = gql`
     }
   }
 `;
+
+const postResponseFields = `
+  _id
+  content
+  slug
+  createdAt
+  user {
+    username
+    avatar
+  }
+  parent {
+    content
+    user {
+      username
+      avatar
+    }
+  }
+`;
+
+export const GET_POSTS_BY_TOPIC = gql`
+  query PostsByTopic ($slug: String) {
+    postsByTopic(slug: $slug) {
+      ${postResponseFields}
+    }
+  }
+`;
