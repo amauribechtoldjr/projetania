@@ -1,15 +1,15 @@
-import { useState } from "react";
 import Pagination from "react-js-pagination";
 
-const AppPagination = ({ count }) => {
-  const [activePage, setActivePage] = useState(1);
+const AppPagination = ({ count, pageSize, pageNum, onChange }) => {
   return (
     <Pagination
-      activePage={activePage}
-      itemsCountPerPage={10}
-      totalItemsCount={count || 0}
+      activePage={pageNum}
+      itemsCountPerPage={pageSize}
+      totalItemsCount={count}
       pageRangeDisplayed={5}
-      onChange={(page) => setActivePage(page)}
+      onChange={(page) => {
+        onChange(page, pageSize);
+      }}
       itemClass="page-item"
       linkClass="page-link"
     />

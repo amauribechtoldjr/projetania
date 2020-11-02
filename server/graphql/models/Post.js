@@ -19,7 +19,6 @@ class Post {
 
     if (postData.parent) {
       const parent = await this.Model.findById(postData.parent);
-      console.log(parent);
       postData.slug = parent.slug + ":" + slugPart;
       postData.fullSlug = parent.fullSlug + ":" + fullSlugPart;
     }
