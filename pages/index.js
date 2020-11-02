@@ -3,8 +3,9 @@ import withApollo from "@/hoc/withApollo";
 import { getDataFromTree } from "@apollo/react-ssr";
 import { useGetHighlight } from "@/apollo/actions";
 import ProjectCard from "@/components/shared/projetos/ProjectCard";
-import TopicLink from "@/components/forum/TopicLink";
+
 import Link from "next/link";
+import TopicLink from "@/components/forum/TopicLink";
 
 const useGetInitialData = () => {
   const { data } = useGetHighlight({ variables: { limit: 3 } });
