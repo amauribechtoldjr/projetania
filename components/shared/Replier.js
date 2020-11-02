@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 const initialReplyData = {
   title: "",
@@ -12,6 +12,7 @@ const Replier = ({
   replyTo,
   hasTitle = true,
 }) => {
+  const contentRef = useRef();
   const [reply, setReply] = useState(initialReplyData);
   const isOpen = open ? "is-open" : "";
 
@@ -46,6 +47,7 @@ const Replier = ({
         <div className="fj-editor">
           <div className="fj-editor-textarea-wrapper">
             <textarea
+              ref={contentRef}
               name="content"
               placeholder="Conteúdo"
               onChange={handleChange}

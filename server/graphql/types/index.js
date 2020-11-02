@@ -90,4 +90,9 @@ exports.forumTypes = `
     posts: [Post]
     count: Int
   }
+
+  type HighlightRes {
+    projects: [Project]
+    topics: [Topic]
+  }
 `;

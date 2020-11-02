@@ -1,3 +1,15 @@
+exports.mixedQueries = {
+  highlight: async (root, { limit = 3 }, ctx) => {
+    const projects = await ctx.models.Project.getRandoms(limit);
+    const topics = await ctx.models.Topic.getRandoms(limit);
+
+    return {
+      projects,
+      topics,
+    };
+  },
+};
+
 exports.projectsQueries = {
   project: (root, { id }, ctx) => {
     return ctx.models.Project.getById(id);

@@ -1,7 +1,8 @@
-class Project {
+const BaseModel = require("./BaseModel");
+
+class Project extends BaseModel {
   constructor(model, user) {
-    this.Model = model;
-    this.user = user;
+    super(model, user);
     this.writeRights = ["admin", "page-admin"];
   }
   getAll() {

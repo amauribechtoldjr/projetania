@@ -11,3 +11,13 @@ export const formatDate = (
     return format(fromUnixTime(date / 1000), formatPattern, { locale: pt });
   return errorMessage;
 };
+
+export const shortify = (text, maxLenght = 50) => {
+  if (!text) return "";
+
+  if (text.length <= maxLenght) {
+    return text;
+  }
+
+  return text.substr(0, maxLenght) + "...";
+};

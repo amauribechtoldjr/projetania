@@ -26,6 +26,7 @@ const useTopicInitialData = (slug, pagination) => {
       pageNum: pagination.pageNum,
       pageSize: pagination.pageSize,
     },
+    pollInterval: 5000,
   });
   const { data: userData } = useGetUser();
   const topic = (topicData && topicData.topicBySlug) || {};
@@ -42,6 +43,7 @@ const PostList = ({ posts, topic, user, fetchMore, ...pagination }) => {
   const [createPost, { error }] = useCreatePost();
   const [isReplierOpen, setReplierOpen] = useState(false);
   const [replyTo, setReplyTo] = useState(null);
+  const { pageSize, count, pageNum } = pagination;
 
   const handleCreatePost = async (reply, resetReplier) => {
     if (replyTo) {
@@ -50,13 +52,21 @@ const PostList = ({ posts, topic, user, fetchMore, ...pagination }) => {
 
     reply.topic = topic._id;
     await createPost({ variables: { ...reply } });
-    await fetchMore({
-      updateQuery: (previousResults, { fetchMoreResult }) => {
-        return Object.assign({}, previousResults, {
-          postsByTopic: [...fetchMoreResult.postsByTopic],
-        });
-      },
-    });
+    let lastPage = Math.ceil(count / pageSize);
+    if (count === 0) lastPage = 1;
+    if (lastPage === pageNum) {
+      await fetchMore({
+        variables: {
+          pageSize,
+          pageNum: lastPage,
+        },
+        updateQuery: (previousResults, { fetchMoreResult }) => {
+          return Object.assign({}, previousResults, {
+            postsByTopic: { ...fetchMoreResult.postsByTopic },
+          });
+        },
+      });
+    }
     resetReplier();
     cleanup();
   };
@@ -74,7 +84,9 @@ const PostList = ({ posts, topic, user, fetchMore, ...pagination }) => {
   return (
     <section className="mb-5">
       <div className="fj-post-list">
-        {topic._id && <PostItem post={topic} className="topic-post-lead" />}
+        {topic._id && pagination.pageNum === 1 && (
+          <PostItem post={topic} className="topic-post-lead" />
+        )}
         <div className="row">
           {posts &&
             posts.map((p) => (

@@ -27,14 +27,20 @@ const ProjectCard = ({ project, updateProject, deleteProject }) => {
           <small className="text-muted">Last updated 3 mins ago</small>
         </div>
       </div>
-      <div>
-        <button onClick={() => updateProject(project._id)}>
-          Update project
-        </button>
-        <button onClick={() => deleteProject && deleteProject(project._id)}>
-          Delete project
-        </button>
-      </div>
+      {(updateProject || deleteProject) && (
+        <div>
+          {updateProject && (
+            <button onClick={() => updateProject(project._id)}>
+              Update project
+            </button>
+          )}
+          {deleteProject && (
+            <button onClick={() => deleteProject(project._id)}>
+              Delete project
+            </button>
+          )}
+        </div>
+      )}
     </div>
   );
 };

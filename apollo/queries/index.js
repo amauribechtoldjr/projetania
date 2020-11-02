@@ -115,3 +115,25 @@ export const GET_POSTS_BY_TOPIC = gql`
     }
   }
 `;
+
+export const GET_HIGHLIGHT = gql`
+  query HighLight($limit: Int) {
+    highlight(limit: $limit) {
+      projects {
+        _id
+        title
+        about_project
+      }
+      topics {
+        slug
+        title
+        createdAt
+        content
+        user {
+          avatar
+          username
+        }
+      }
+    }
+  }
+`;

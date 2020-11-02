@@ -1,13 +1,9 @@
 const slugify = require("slugify");
 const uniqueSlug = require("unique-slug");
+const BaseModel = require("./BaseModel");
 const { formatISO } = require("date-fns");
 
-class Post {
-  constructor(model, user) {
-    this.Model = model;
-    this.user = user;
-    this.writeRights = ["admin", "page-admin"];
-  }
+class Post extends BaseModel {
   async create(postData) {
     if (!this.user) throw new Error("You are not authenticated");
 

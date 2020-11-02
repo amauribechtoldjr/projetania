@@ -8,6 +8,7 @@ const {
   userQueries,
   forumQueries,
   forumMutations,
+  mixedQueries,
 } = require("./resolvers");
 const { projectsTypes, userTypes, forumTypes } = require("./types");
 
@@ -37,6 +38,8 @@ exports.createApolloServer = () => {
       topicBySlug(slug: String): Topic
 
       postsByTopic(slug: String, pageNum: Int, pageSize: Int): PaginatedPosts
+
+      highlight(limit: Int): HighlightRes
     }
 
     type Mutation {
@@ -58,6 +61,7 @@ exports.createApolloServer = () => {
       ...projectsQueries,
       ...userQueries,
       ...forumQueries,
+      ...mixedQueries,
     },
     Mutation: {
       ...projectsMutations,

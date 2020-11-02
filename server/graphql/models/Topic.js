@@ -1,11 +1,11 @@
 const slugify = require("slugify");
 const uniqueSlug = require("unique-slug");
+const BaseModel = require("./BaseModel");
 
-class Topic {
-  constructor(model, user) {
-    this.Model = model;
-    this.user = user;
-    this.writeRights = ["admin", "page-admin"];
+class Topic extends BaseModel {
+  async getRandoms(limit) {
+    const query = await super.getRandoms(limit);
+    return query().populate("user");
   }
   getBySlug(slug) {
     return this.Model.findOne({ slug })
@@ -29,7 +29,7 @@ class Topic {
     topicData.user = this.user;
     topicData.slug = slugify(topicData.title, {
       replacement: "_",
-      remove: /[*+~.()'"!:@]/g,
+      remove: /[*+~.()'"!:@?]/g,
       lower: true,
       strict: false,
     });

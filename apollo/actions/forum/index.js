@@ -12,7 +12,16 @@ export const useGetForumCategories = () => useQuery(GET_FORUM_CATEGORIES);
 export const useGetTopicsByCategory = (variables) =>
   useQuery(GET_TOPICS_BY_CATEGORY, { variables });
 
-export const useCreatePost = () => useMutation(CREATE_POST);
+export const useCreatePost = () =>
+  useMutation(CREATE_POST, {
+    update(cache) {
+      try {
+        Object.keys(cache.data.data).forEach((key) => {
+          key.match(/^Post/) && cache.data.delete(key);
+        });
+      } catch (e) {}
+    },
+  });
 
 export const useCreateTopic = () =>
   useMutation(CREATE_TOPIC, {
