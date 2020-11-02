@@ -18,6 +18,7 @@ const useGetInitialData = () => {
 
 const Home = () => {
   const { topics, projects } = useGetInitialData();
+
   return (
     <BaseLayout page="Home">
       <section className="section-title">
