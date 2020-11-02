@@ -7,16 +7,13 @@ import { getDataFromTree } from "@apollo/react-ssr";
 const useTopicInitialData = () => {
   const router = useRouter();
   const { topicSlug: slug } = router.query;
-  console.log(slug);
-  const { data } = useGetTopicBySlug({ variables: slug });
-  console.log(data);
+  const { data } = useGetTopicBySlug({ variables: { slug } });
   const topic = (data && data.topicBySlug) || {};
   return { topic };
 };
 
 const Topic = () => {
   const { topic } = useTopicInitialData();
-  console.log(topic);
 
   return (
     <BaseLayout>

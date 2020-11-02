@@ -1,7 +1,6 @@
 class ForumCategory {
-  constructor(model, user) {
+  constructor(model) {
     this.Model = model;
-    this.user = user;
     this.writeRights = ["admin", "page-admin"];
   }
   getAll() {
