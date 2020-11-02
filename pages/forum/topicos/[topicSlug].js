@@ -9,7 +9,7 @@ import { useGetUser } from "@/apollo/actions/user";
 import { useRouter } from "next/router";
 import withApollo from "@/hoc/withApollo";
 import { getDataFromTree } from "@apollo/react-ssr";
-import PostItem from "@/components/Forum/PostItem";
+import PostItem from "@/components/forum/PostItem";
 import Replier from "@/components/shared/Replier";
 import { toast } from "react-toastify";
 import Pagination from "@/components/shared/Pagination";
