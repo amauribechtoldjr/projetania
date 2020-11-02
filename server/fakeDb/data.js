@@ -44,6 +44,8 @@ const data = {
       password: "senha123",
       email: "amauribechtoldjr@gmail.com",
       info: "page-admin",
+      avatar:
+        "https://cdn.icon-icons.com/icons2/1736/PNG/512/4043260-avatar-male-man-portrait_113269.png",
       role: "page-admin",
     },
     {
@@ -53,6 +55,8 @@ const data = {
       password: "admin123",
       email: "admin@projetania.com",
       info: "Administrador",
+      avatar:
+        "https://cdn1.iconfinder.com/data/icons/ninja-things-1/1772/ninja-simple-512.png",
       role: "admin",
     },
   ],

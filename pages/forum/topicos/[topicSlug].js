@@ -3,6 +3,7 @@ import { useGetTopicBySlug, useGetPostsByTopic } from "@/apollo/actions/forum";
 import { useRouter } from "next/router";
 import withApollo from "@/hoc/withApollo";
 import { getDataFromTree } from "@apollo/react-ssr";
+import PostItem from "@/components/Forum/PostItem";
 
 const useTopicInitialData = () => {
   const router = useRouter();
@@ -28,149 +29,14 @@ const Topic = () => {
       </section>
       <section>
         <div className="fj-post-list">
+          {topic._id && <PostItem post={topic} className="topic-post-lead" />}
           <div className="row">
-            <div className="col-md-9">
-              <div className="topic-post">
-                <article>
-                  <div className="row">
-                    <div className="topic-avatar">
-                      <div className="main-avatar">
-                        <img
-                          className="avatar subtle-shadow"
-                          src="https://i.imgur.com/cVDadwb.png"
-                        ></img>
-                      </div>
-                    </div>
-                    <div className="topic-body">
-                      <div className="topic-header">
-                        <div className="topic-meta">
-                          <div className="name-container">
-                            <span className="name">Filip Jerga</span>
-                          </div>
-                          <div className="date-container">
-                            <span className="date">21h</span>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="topic-content">
-                        <div className="cooked">
-                          <p>
-                            Lorem Ipsum is simply dummy text of the printing and
-                            typesetting industry. Lorem Ipsum has been the
-                            industry's standard dummy text ever since the 1500s,
-                            when an unknown printer took a galley of type and
-                            scrambled it to make a type specimen book.
-                          </p>
-                        </div>
-                        <section className="post-menu-area">
-                          <nav className="post-controls">
-                            <div className="actions">
-                              <button className="btn">reply</button>
-                            </div>
-                          </nav>
-                        </section>
-                      </div>
-                    </div>
-                  </div>
-                </article>
-              </div>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-md-9">
-              <div className="topic-post">
-                <article>
-                  <div className="row">
-                    <div className="topic-avatar">
-                      <div className="main-avatar">
-                        <img
-                          className="avatar subtle-shadow"
-                          src="https://i.imgur.com/cVDadwb.png"
-                        ></img>
-                      </div>
-                    </div>
-                    <div className="topic-body">
-                      <div className="topic-header">
-                        <div className="topic-meta">
-                          <div className="name-container">
-                            <span className="name">Filip Jerga</span>
-                          </div>
-                          <div className="date-container">
-                            <span className="date">21h</span>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="topic-content">
-                        <div className="cooked">
-                          <p>
-                            Lorem Ipsum is simply dummy text of the printing and
-                            typesetting industry. Lorem Ipsum has been the
-                            industry's standard dummy text ever since the 1500s,
-                            when an unknown printer took a galley of type and
-                            scrambled it to make a type specimen book.
-                          </p>
-                        </div>
-                        <section className="post-menu-area">
-                          <nav className="post-controls">
-                            <div className="actions">
-                              <button className="btn">reply</button>
-                            </div>
-                          </nav>
-                        </section>
-                      </div>
-                    </div>
-                  </div>
-                </article>
-              </div>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-md-9">
-              <div className="topic-post">
-                <article>
-                  <div className="row">
-                    <div className="topic-avatar">
-                      <div className="main-avatar">
-                        <img
-                          className="avatar subtle-shadow"
-                          src="https://i.imgur.com/cVDadwb.png"
-                        ></img>
-                      </div>
-                    </div>
-                    <div className="topic-body">
-                      <div className="topic-header">
-                        <div className="topic-meta">
-                          <div className="name-container">
-                            <span className="name">Filip Jerga</span>
-                          </div>
-                          <div className="date-container">
-                            <span className="date">21h</span>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="topic-content">
-                        <div className="cooked">
-                          <p>
-                            Lorem Ipsum is simply dummy text of the printing and
-                            typesetting industry. Lorem Ipsum has been the
-                            industry's standard dummy text ever since the 1500s,
-                            when an unknown printer took a galley of type and
-                            scrambled it to make a type specimen book.
-                          </p>
-                        </div>
-                        <section className="post-menu-area">
-                          <nav className="post-controls">
-                            <div className="actions">
-                              <button className="btn">reply</button>
-                            </div>
-                          </nav>
-                        </section>
-                      </div>
-                    </div>
-                  </div>
-                </article>
-              </div>
-            </div>
+            {posts &&
+              posts.map((p) => (
+                <div className="col-md-9" key={p._id}>
+                  <PostItem post={p} />
+                </div>
+              ))}
           </div>
         </div>
       </section>
