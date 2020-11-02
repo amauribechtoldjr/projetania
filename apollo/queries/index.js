@@ -108,7 +108,10 @@ export const postResponseFields = `
 export const GET_POSTS_BY_TOPIC = gql`
   query PostsByTopic ($slug: String) {
     postsByTopic(slug: $slug) {
-      ${postResponseFields}
+      posts {
+        ${postResponseFields}
+      }
+      count
     }
   }
 `;

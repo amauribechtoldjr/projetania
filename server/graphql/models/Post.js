@@ -30,18 +30,23 @@ class Post {
     }
 
     const createdPost = await this.Model.create(postData);
-    console.log(createdPost);
     return this.Model.findById(createdPost._id)
       .populate("topic")
       .populate("user")
       .populate({ path: "parent", populate: "user" });
   }
-  getAllByTopic(topic) {
-    return this.Model.find({ topic: topic._id })
-      .sort("fullSlug")
+  async getAllByTopic(topic) {
+    const count = await this.Model.countDocuments({ topic: topic._id });
+    const posts = await this.Model.find({ topic: topic._id })
+      .sort("createdAt")
       .populate("topic")
       .populate("user")
       .populate({ path: "parent", populate: "user" });
+
+    return {
+      posts,
+      count,
+    };
   }
 }
 

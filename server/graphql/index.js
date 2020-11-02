@@ -36,7 +36,7 @@ exports.createApolloServer = () => {
       topicsByCategory(category: ID): [Topic]
       topicBySlug(slug: String): Topic
 
-      postsByTopic(slug: String): [Post]
+      postsByTopic(slug: String): PaginatedPosts
     }
 
     type Mutation {

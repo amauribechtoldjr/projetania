@@ -12,20 +12,25 @@ import { getDataFromTree } from "@apollo/react-ssr";
 import PostItem from "@/components/Forum/PostItem";
 import Replier from "@/components/shared/Replier";
 import { toast } from "react-toastify";
+import Pagination from "@/components/shared/Pagination";
 
 const useTopicInitialData = () => {
   const router = useRouter();
   const { topicSlug: slug } = router.query;
   const { data: topicData } = useGetTopicBySlug({ variables: { slug } });
-  const { data: topicPostsData } = useGetPostsByTopic({ variables: { slug } });
+  const { data: topicPostsData, fetchMore } = useGetPostsByTopic({
+    variables: { slug },
+  });
   const { data: userData } = useGetUser();
   const topic = (topicData && topicData.topicBySlug) || {};
-  const posts = (topicPostsData && topicPostsData.postsByTopic) || [];
+  const postsData = (topicPostsData && topicPostsData.postsByTopic) || {
+    posts: [],
+  };
   const user = (userData && userData.user) || null;
-  return { topic, posts, user };
+  return { topic, ...postsData, user, fetchMore };
 };
 
-const PostList = ({ posts, topic, user }) => {
+const PostList = ({ posts, topic, user, fetchMore, count }) => {
   const pageEnd = useRef();
   const [createPost, { error }] = useCreatePost();
   const [isReplierOpen, setReplierOpen] = useState(false);
@@ -38,9 +43,20 @@ const PostList = ({ posts, topic, user }) => {
 
     reply.topic = topic._id;
     await createPost({ variables: { ...reply } });
+    await fetchMore({
+      updateQuery: (previousResults, { fetchMoreResult }) => {
+        return Object.assign({}, previousResults, {
+          postsByTopic: [...fetchMoreResult.postsByTopic],
+        });
+      },
+    });
+    resetReplier();
+    cleanup();
+  };
+
+  const cleanup = () => {
     toast.success("Post criado com sucesso!", { autoClose: 2000 });
     setReplierOpen(false);
-    resetReplier();
     scrollToBottom();
   };
 
@@ -84,6 +100,9 @@ const PostList = ({ posts, topic, user }) => {
                 </button>
               </div>
             )}
+            <div className="pagination-container ml-auto">
+              <Pagination count={count} />
+            </div>
           </div>
         </div>
       </div>
@@ -107,7 +126,7 @@ const PostList = ({ posts, topic, user }) => {
 };
 
 const Topic = () => {
-  const { topic, posts, user } = useTopicInitialData();
+  const { topic, posts, ...rest } = useTopicInitialData();
 
   return (
     <BaseLayout>
@@ -118,7 +137,7 @@ const Topic = () => {
           </div>
         </div>
       </section>
-      <PostList posts={posts} topic={topic} user={user} />
+      <PostList posts={posts} topic={topic} {...rest} />
     </BaseLayout>
   );
 };

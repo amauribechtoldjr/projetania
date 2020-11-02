@@ -85,4 +85,9 @@ exports.forumTypes = `
     parent: String
     topic: String
   }
+
+  type PaginatedPosts {
+    posts: [Post]
+    count: Int
+  }
 `;
