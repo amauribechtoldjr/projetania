@@ -5,6 +5,7 @@ export const TopicResponseFields = `
   slug
   title
   content
+  createdAt
   user {
     username
     avatar

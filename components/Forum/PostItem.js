@@ -1,4 +1,6 @@
-const PostItem = ({ post, className }) => {
+import { formatDate } from "@/utils/functions";
+
+const PostItem = ({ post, className, onReply, canCreate = false }) => {
   const parent = post.parent;
 
   return (
@@ -20,7 +22,13 @@ const PostItem = ({ post, className }) => {
                   <span className="name">{post.user.username}</span>
                 </div>
                 <div className="date-container">
-                  <span className="date">{post.createdAt}</span>
+                  <span className="date">
+                    {formatDate(
+                      post.createdAt,
+                      "Data inválida",
+                      "'Dia' dd 'de' MMMM', às ' HH:mm'h'"
+                    )}
+                  </span>
                 </div>
               </div>
             </div>
@@ -51,7 +59,20 @@ const PostItem = ({ post, className }) => {
               <section className="post-menu-area">
                 <nav className="post-controls">
                   <div className="actions">
-                    <button className="btn">Responder</button>
+                    {onReply && (
+                      <button
+                        disabled={!canCreate}
+                        className="btn"
+                        onClick={() => onReply({ ...post })}
+                        title={
+                          !canCreate
+                            ? "Faça o login para responder"
+                            : "Responder"
+                        }
+                      >
+                        Responder
+                      </button>
+                    )}
                   </div>
                 </nav>
               </section>

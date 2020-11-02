@@ -5,7 +5,13 @@ const initialReplyData = {
   content: "",
 };
 
-const Replier = ({ open, closeBtn: CloseButton, onSubmit, replyTo }) => {
+const Replier = ({
+  open,
+  closeBtn: CloseButton,
+  onSubmit,
+  replyTo,
+  hasTitle = true,
+}) => {
   const [reply, setReply] = useState(initialReplyData);
   const isOpen = open ? "is-open" : "";
 
@@ -23,19 +29,20 @@ const Replier = ({ open, closeBtn: CloseButton, onSubmit, replyTo }) => {
       <div className="reply-area">
         {replyTo && (
           <div className="reply-to">
-            Reply To: <span className="text ml-2">User1</span>
+            Responder para: <span className="text ml-2">{replyTo}</span>
           </div>
         )}
-
-        <div className="fj-editor-input">
-          <input
-            name="title"
-            placeholder="Título"
-            type="text"
-            onChange={handleChange}
-            value={reply.title}
-          />
-        </div>
+        {hasTitle && (
+          <div className="fj-editor-input">
+            <input
+              name="title"
+              placeholder="Título"
+              type="text"
+              onChange={handleChange}
+              value={reply.title}
+            />
+          </div>
+        )}
         <div className="fj-editor">
           <div className="fj-editor-textarea-wrapper">
             <textarea
