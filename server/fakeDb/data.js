@@ -148,7 +148,7 @@ const data = {
         "/" +
         formatISO(post3CreatedAt) +
         ":md79" +
-        +"/" +
+        "/" +
         formatISO(post4CreatedAt) +
         ":md89",
       topic: topic1Id,
